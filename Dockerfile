@@ -81,7 +81,6 @@ WORKDIR ${PG_HOME}
 # use updated runtime and entrypoint.sh scritps to execute init scripts after the database is started.:wq
 ADD /docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
 COPY runtime/ ${PG_APP_HOME}/
-COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
