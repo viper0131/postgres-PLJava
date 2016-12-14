@@ -397,7 +397,7 @@ init_scripts() {
     case "$f" in
       *.sh)     echo "$0: running $f"; . "$f" ;;
       *.sql)    echo "$0: running $f"; psql -U ${PG_USER} < "$f"; echo ;;
-      *.sql.gz) echo "$0: running $f"; gunzip -c "$f" | "${psql[@]}"; echo ;;
+      *.sql.gz) echo "$0: running $f"; gunzip -c "$f" | psql -U ${PG_USER}; echo ;;
       *)        echo "$0: ignoring $f" ;;
     esac
     echo
