@@ -1,4 +1,4 @@
-FROM sameersbn/postgresql
+FROM sameersbn/postgresql:9.5
 MAINTAINER machiel.van.ampting@trivento.nl
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
@@ -27,8 +27,9 @@ RUN apt-get clean && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --
     ln -s /opt/maven/bin/mvn /usr/local/bin && \
     rm -f /tmp/apache-maven-3.2.2.tar.gz && \
     cd /tmp && \
-    git clone https://github.com/tada/pljava.git && \
-    cd /tmp/pljava && \
+    git clone https://github.com/tada/pljava.git
+
+RUN cd /tmp/pljava && \
     mvn -Pwnosign  clean install && \
     java -jar /tmp/pljava/pljava-packaging/target/pljava-pg9.5-amd64-Linux-gpp.jar && \
     apt-get -y remove --purge --auto-remove git \
@@ -64,7 +65,7 @@ RUN apt-get clean && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get --
 
 WORKDIR ${PG_HOME}
 
-# use updated runtime and entrypoint.sh scritps to execute init scripts after the database is started.:wq
+# use updated runtime and entrypoint.sh scritps to execute init scripts after the database is started.
 ADD /docker-entrypoint-initdb.d /docker-entrypoint-initdb.d
 COPY runtime/ ${PG_APP_HOME}/
 
