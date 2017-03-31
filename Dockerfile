@@ -1,4 +1,5 @@
 FROM sameersbn/postgresql:9.5
+#FROM centos/postgresql-94-centos7
 MAINTAINER machiel.van.ampting@trivento.nl
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
